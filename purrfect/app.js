@@ -34,25 +34,29 @@ function updateCartDisplay() {
     for (const category in cart) {
         if (cart.hasOwnProperty(category)) {
             const categoryItems = cart[category];
-            const categoryHeading = document.createElement('h3');
-            categoryHeading.textContent = `${category} Items`;
-            cartContentElement.appendChild(categoryHeading);
 
-            const itemList = document.createElement('ul');
-            categoryItems.forEach((item, index) => {
-                const listItem = document.createElement('li');
-                const priceText = typeof item.price === 'number' ? `$${item.price.toFixed(2)}` : 'Invalid Price';
-                listItem.textContent = `${item.item} - ${priceText}`;
+            // Check if the category has items
+            if (categoryItems.length > 0) {
+                const categoryHeading = document.createElement('h3');
+                categoryHeading.textContent = `${category} Items`;
+                cartContentElement.appendChild(categoryHeading);
 
-                const removeButton = document.createElement('button');
-                removeButton.textContent = '\u00d7';
-                removeButton.addEventListener('click', () => removeFromCart(category, index));
+                const itemList = document.createElement('ul');
+                categoryItems.forEach((item, index) => {
+                    const listItem = document.createElement('li');
+                    const priceText = typeof item.price === 'number' ? `$${item.price.toFixed(2)}` : 'Invalid Price';
+                    listItem.textContent = `${item.item} - ${priceText}`;
 
-                listItem.appendChild(removeButton);
-                listItem.style.listStyle = 'none';
-                itemList.appendChild(listItem);
-            });
-            cartContentElement.appendChild(itemList);
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = '\u00d7';
+                    removeButton.addEventListener('click', () => removeFromCart(category, index));
+
+                    listItem.appendChild(removeButton);
+                    listItem.style.listStyle = 'none';
+                    itemList.appendChild(listItem);
+                });
+                cartContentElement.appendChild(itemList);
+            }
         }
     }
 }
@@ -85,3 +89,20 @@ function logoutAlert() {
         //nothing will happen
     }
 }
+function PostAlert() {
+    // Display a confirmation dialog
+    var result = window.confirm("Please double-check your post before submitting. Are you sure you want to post?");
+    
+    // If the user clicks OK, the form will be submitted; otherwise, it won't
+    return result;
+}
+
+function ExitPostAlert() {
+    result = window.confirm("Are you sure you want to exit? Changes will not be saved.");
+    if (result){
+        window.location.href = "products.php";
+    } else {
+        //nothing will happen
+    }
+}
+

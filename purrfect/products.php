@@ -1,7 +1,8 @@
-<?php
-// Start or resume the session
+<?php //redirected to dashboard if nakalogin na sila
 session_start();
-// The rest of your admin-only page content goes here
+if (!isset($_SESSION['user'])){
+    header("Location: dashboard.php");
+}
 
 ?>
 
@@ -20,23 +21,24 @@ session_start();
                 <div class="toggle"></div>
                 <ul class="navigation">
                 <?php 
-                    require_once 'database.php';
-
-                    $sql = "SELECT is_admin FROM users";
-                    $result = mysqli_query($conn, $sql);
-
-                    // Check if the query was successful
-                    if ($result) {
-                        $admin = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-                        // Check if the user is an admin
-                        if ($admin['is_admin'] == 1) {
-                            echo "<li><a href='postproduct.php'>Post Product</a></li>";
-                        } 
-                    } 
-
-                    // Close the database connection
-                    mysqli_close($conn);
+                    if (isset($_SESSION['user_id'])) {
+                        require_once 'database.php';
+                    
+                        $user_id = $_SESSION['user_id'];
+                    
+                        $sql = "SELECT is_admin FROM users WHERE user_id = $user_id";
+                        $result = mysqli_query($conn, $sql);
+                    
+                        // Check if the query was successful
+                        if ($result) {
+                            $admin = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    
+                            // Check if the user is an admin
+                            if ($admin['is_admin'] == 1) {
+                                echo "<li><a href='postproduct.php'>Post Product</a></li>";
+                            }
+                        }
+                    }
                     ?>
                     <li><a href="dashboard.php">Home</a></li>
                     <li><a href="products.php">Products</a></li>
@@ -58,12 +60,65 @@ session_start();
                     <div id="total"></div>
                 </div>
             </div>
+            <?php
+            // Include the database connection file
+            include "database.php";
+
+            // Retrieve product data from the database
+            $sql = "SELECT * FROM product";
+            $result = mysqli_query($conn, $sql);
+
+            // Organize products by product group
+            $productsByGroup = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $productsByGroup[$row['product_group']][] = $row;
+            }
+
+            // Close the database connection
+            mysqli_close($conn);
+            ?>
             <!-- Category Template START-->
+            <?php
+                $categoryHeaders = [
+                'food' => 'Pet Food',
+                'health' => 'Health and Wellness Products',
+                'accessory' => 'Collars, Leashes, and Harnesses',
+                'toy' => 'Toys for Pets',
+                'bedcage' => 'Beddings and Cages',
+                'supplies' => 'Grooming Supplies',
+                'utility' => 'Pet Utilities',
+                ];
+                foreach ($productsByGroup as $group => $products) {
+                echo '<div class="header-title">';
+                // Get the corresponding header from the mapping array, or use the group name if not found
+                $categoryHeader = isset($categoryHeaders[$group]) ? $categoryHeaders[$group] : $group;
+                echo '<h1>' . htmlspecialchars($categoryHeader) . '</h1>';
+                echo '</div>';
+                echo '<div class="grid-container">';
+
+                // Loop through products in the current group
+                foreach ($products as $product) {
+                    echo '<div class="product-card">';
+                    echo '<div class="product-image" style="background-image: url(\'' . $product['image_url'] . '\');"></div>';
+                    echo '<div class="product-details">';
+                    echo '<div class="product-name">' . $product['product_name'] . '</div>';
+                    echo '<div class="product-description">' . $product['product_desc'] . '</div>';
+                    echo '<div class="product-price">$' . $product['product_price'] . '</div>';
+                    echo '<button class="add-to-cart" onclick="addToCart(\'' . $product['product_name'] . '\', \'' . $group . '\', ' . $product['product_price'] . ')" >Add to Cart</button>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+
+                echo '</div>'; // Close the grid-container for the current product group
+            }
+            ?>
+
             <div class="header-title">
-                <h1>PET FOOD</h1>
+                <h1>Pet Food</h1>
             </div>
             <div class="grid-container">
                 <!-- Product Card -->
+                
                 <div class="product-card">
                     <div class="product-image" style="background-image: url('./images/Petfood/Canned Food/Special Cat - Beef and Liver.png');"></div>
                     <div class="product-details">

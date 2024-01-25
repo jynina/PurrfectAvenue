@@ -31,7 +31,8 @@ if (isset($_SESSION['user'])){
 								if(password_verify($password, $user['password'])){
 									session_start();
 									$_SESSION['user'] = 'yes';
-									$_SESSION['user_email'] = $email;
+									$_SESSION['user_email'] = $user['email'];
+									$_SESSION['user_id'] = $user['user_id'];
 									header("Location: dashboard.php");//after successful login, user will be redirected
 									die();
 								}else{

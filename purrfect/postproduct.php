@@ -1,0 +1,80 @@
+<?php
+session_start(); // Start the session if not already started
+
+// Check if the user is logged in
+if (isset($_SESSION['user_id'])) {
+    // The user is logged in
+    $user_id = $_SESSION['user_id'];
+    
+    // Your other code here
+} else {
+    // Redirect to the login page or handle unauthorized access
+    header("Location: login.php");
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posting Page</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+	<a href="products.php"><img src="images/Background/back-arrow.png" class="logo" onclick="ExitPostAlert()"></a> 
+</header> 
+<div class="container">
+    <div class="form-container">
+    <div class="form register">
+    <form method="post" action="process.php"  onsubmit="return PostAlert()">
+                
+    <label for="imgurl">Image URL</label>
+    <input type="text" name="imgurl" required>
+
+    <label for="productName">Product Name</label>
+    <input type="text" name="productName" required>
+
+    <label for="productPrice">Product Price</label>
+    <input type="text" name="productPrice" required>
+
+    <div class="product-categories">
+    <label for="productGroup">Product Category<br></label>
+
+    <label for="petfood">Pet Food</label>
+    <input type="radio" name="productGroup" id= "food" value="food">
+
+    <label for="petfood">Health and wellness products (vitamins, supplements)</label>
+    <input type="radio" name="productGroup" id= "health" value="health">
+
+    <label for="petfood">Collars, leashes, and harnesses</label>
+    <input type="radio" name="productGroup" id= "accessory" value="accessory">
+
+    <label for="petfood">Toys for pets</label>
+    <input type="radio" name="productGroup" id= "toy" value="toy">
+
+    <label for="petfood">Bedding and cages</label>
+    <input type="radio" name="productGroup" id= "bedcage" value="bedcage">
+
+    <label for="petfood">Grooming supplies (brushes, shampoos)</label>
+    <input type="radio" name="productGroup" id= "supplies" value="supplies">
+    
+    <label for="petfood">Pet Utilities</label>
+    <input type="radio" name="productGroup" id= "utility" value="utility">
+    </div>
+    
+    <label for="productDesc">Product Description:</label>
+    
+    <textarea class="textarea"name="productDesc" required contenteditable="true"></textarea>
+
+    <input type="submit" value="Submit">
+</form>
+</div>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

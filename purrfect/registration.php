@@ -16,7 +16,7 @@ if (isset($_SESSION['user'])){
 <body>
     <div class="container">
         <div class ="form register"> 
-			<div class="form-content"> 
+			 
                 <?php
                 if (isset($_POST['submit'])){ //makes sure that the submit has been clicked
                 //declaration of variables
@@ -106,5 +106,6 @@ if (isset($_SESSION['user'])){
 			}
 		})
 	</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
 </html>
