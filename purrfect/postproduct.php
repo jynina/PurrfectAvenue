@@ -40,9 +40,10 @@ if (isset($_SESSION['user_id'])) {
 
     <label for="productPrice">Product Price</label>
     <input type="text" name="productPrice" required>
+<!-- -->
 
     <div class="product-categories">
-    <label for="productGroup">Product Category<br></label>
+    <label for="productGroup">Product Category <span style="color: red;">REQUIRED</span><br><br></label>
 
     <label for="petfood">Pet Food</label>
     <input type="radio" name="productGroup" id= "food" value="food">
@@ -65,11 +66,11 @@ if (isset($_SESSION['user_id'])) {
     <label for="petfood">Pet Utilities</label>
     <input type="radio" name="productGroup" id= "utility" value="utility">
     </div>
-    
+<!-- -->
     <label for="productDesc">Product Description:</label>
     
     <textarea class="textarea"name="productDesc" required contenteditable="true"></textarea>
-
+    
     <input type="submit" value="Submit">
 </form>
 </div>

@@ -90,11 +90,7 @@ function logoutAlert() {
     }
 }
 function PostAlert() {
-    // Display a confirmation dialog
-    var result = window.confirm("Please double-check your post before submitting. Are you sure you want to post?");
     
-    // If the user clicks OK, the form will be submitted; otherwise, it won't
-    return result;
 }
 
 function ExitPostAlert() {

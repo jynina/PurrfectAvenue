@@ -1,12 +1,13 @@
 <?php
 include "database.php"; // Include the database connection file
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $image_url = $_POST['imgurl'];
     $product_name = $_POST['productName'];
     $product_desc = $_POST['productDesc'];
     $product_price = $_POST['productPrice'];
     $product_group = $_POST['productGroup'];
+
+
 
     // Perform SQL insertion
     $sql = "INSERT INTO product (image_url, product_name, product_desc, product_price, product_group) VALUES (?, ?, ?, ?, ?)";
@@ -37,5 +38,6 @@ mysqli_close($conn); // Close the database connection
 <body>
     <a href="dashboard.php">Back to Dashboard</a>
     <a href="products.php">Back to Products</a>
+    <a href="postproduct.php">Post Another Product</a>
 </body>
 </html>
