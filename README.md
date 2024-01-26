@@ -1,10 +1,12 @@
-Anong bago sa program?
-Binago ko yung file name from login_register to purrfect
-1. Naglagay na ako ng admin per user, bale default na value nya is false and lahat ng magreregister na users ay meron nito. mamomodify lang yung if admin yung user sa database.
-2. Created products db
-3. merong posting page of products na nakakapaginsert ng data sa database. Only admins can access the posting page.
-4. yung sa mga products, hindi na sya hard coded sa html, nasa database na lahat ng products then nakadisplay na sila sa products page. So if gusto nyo maglagay pa ng products, insert nalang kayo either by database or sa posting page gamit admin.
+# Purrfect Pet Services
+Ayoko na
 
-New pages:
-postproducts.php, process.php
+
+## Changes (1/25/2024)
+
+- Created database for products (product.sql)
+- Modified database and added is_admin column in users.sql
+- Created Posting Page only for admins, dito mag-iinsert ng mga data yung admins (gumagana naman)
+- Products are not hardcoded in products.php. Lahat ng products ay nasa database na and nadidisplay na silang lahat sa products.php.
+- New pages: postproducts.php, process.php
 
