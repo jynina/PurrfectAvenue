@@ -28,7 +28,7 @@ if (!isset($_SESSION['user'])){
                     
                         $sql = "SELECT is_admin FROM users WHERE user_id = $user_id";
                         $result = mysqli_query($conn, $sql);
-                    
+                        
                         // Check if the query was successful
                         if ($result) {
                             $admin = mysqli_fetch_array($result, MYSQLI_ASSOC);
