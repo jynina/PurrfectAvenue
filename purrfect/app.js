@@ -47,7 +47,8 @@ function updateCartDisplay() {
                     const priceText = typeof item.price === 'number' ? `$${item.price.toFixed(2)}` : 'Invalid Price';
                     listItem.textContent = `${item.item} - ${priceText}`;
 
-                    const removeButton = document.createElement('button');
+                    const removeButton = document.createElement('button'); 
+                    
                     removeButton.textContent = '\u00d7';
                     removeButton.addEventListener('click', () => removeFromCart(category, index));
 

@@ -37,8 +37,8 @@ if (isset($_SESSION['user'])){
                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 array_push($errors, "Invalid Email Address");
                }
-               if (strlen($password)<8) {
-                array_push($errors,"Password must be at least 8 characters");
+               if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/", $password)) {
+                array_push($errors,"Password must be at least 8 characters and include at least one number, symbol, uppercase, and lowercase letter.");
                }
                if ($password!== $passwordRepeat) {
                 array_push($errors,"Password does not match");
@@ -83,7 +83,10 @@ if (isset($_SESSION['user'])){
 							<input type="password" name="password" placeholder="Enter your password"> 
 							<i class='bx bx-hide eye-icon register toggle-register'></i> 
 						</div>	
-						<input type="password" name="repeat-password" placeholder="Confirm your password">  
+						<div class="field input-field">
+						    <input type="password" name="repeat-password" placeholder="Confirm your password">  
+                            <i class='bx bx-hide eye-icon register toggle-repeat-password'></i>
+                        </div>
 						<p>By clicking the register button, you agree to our<br><a href="">Terms and Conditions</a> and <a href="#">Privacy Policy</a></p>
 						<input type="submit" name="submit" value="Register" class="form-btn">  
 						<p>Already have an account? <a href="login.php">Log in here</a></p>
@@ -93,18 +96,28 @@ if (isset($_SESSION['user'])){
 		</div>
     </div>
     <script>
-		const toggle = document.querySelector(".toggle-register"), 
-		input = document.querySelector(".field input[name='password']"); 
+    document.addEventListener('DOMContentLoaded', function() {
+		const togglePassword = document.querySelector(".toggle-register"), 
+        toggleRepeatPassword = document.querySelector(".toggle-repeat-password"),
+        passwordInput = document.querySelector("input[name='password']"),
+		repeatPasswordInput = document.querySelector("input[name='repeat-password']"); 
 		
-		toggle.addEventListener("click", ()=>{
-			if(input.type === "password"){
+        function togglePasswordVisibility(toggle, input) {
+			if(input.type === "password") {
 				input.type = "text"; 
 				toggle.classList.replace("bx-hide", "bx-show");
 			} else {
 				input.type = "password"; 
 				toggle.classList.replace("bx-show", "bx-hide");
 			}
-		})
+		}
+        togglePassword.addEventListener("click", () => {
+            togglePasswordVisibility(togglePassword, passwordInput);
+        }); 
+        toggleRepeatPassword.addEventListener("click", () => {
+            togglePasswordVisibility(toggleRepeatPassword, repeatPasswordInput);
+        });
+    });
 	</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
