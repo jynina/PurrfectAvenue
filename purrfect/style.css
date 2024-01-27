@@ -10,14 +10,14 @@
 	display: flex; 
 	align-items: center; 
 	justify-content: center; 
-	background-image: url('../login_register/images/Background/purr2.png'); 
+	background-image: url('/purrfect/images/Background/purr2.png'); 
 	background-size: cover;
 } 
 .registration {
-	background-image: url('../login_register/images/Background/purr3.png');
+	background-image: url('/purrfect/images/Background/purr3.png');
 } 
 .logIn {
-	background-image: url('../login_register/images/Background/purr2.png');
+	background-image: url('/purrfect/images/Background/purr2.png');
 }
 .form {
 	position:fixed;
