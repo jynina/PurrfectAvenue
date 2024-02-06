@@ -30,7 +30,7 @@ if (isset($_SESSION['user_id'])) {
 <div class="container">
     <div class="form-container">
     <div class="form register">
-    <form method="post" action="process.php"  onsubmit="return PostAlert()">
+    <form method="post" action="postprocess.php"  onsubmit="return PostAlert()">
                 
     <label for="imgurl">Image URL</label>
     <input type="text" name="imgurl" required>
@@ -69,7 +69,7 @@ if (isset($_SESSION['user_id'])) {
 <!-- -->
     <label for="productDesc">Product Description:</label>
     
-    <textarea class="textarea"name="productDesc" required contenteditable="true"></textarea>
+    <input type="text" name="productDesc" required>
     
     <input type="submit" value="Submit">
 </form>

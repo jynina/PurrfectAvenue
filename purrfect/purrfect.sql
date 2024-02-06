@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Jan 25, 2024 at 05:52 PM
+-- Generation Time: Feb 06, 2024 at 06:02 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,10 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Table structure for table `orders`
 --
 
-CREATE TABLE `product` (
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `contact_number` varchar(20) NOT NULL,
+  `address` text NOT NULL,
+  `payment_mode` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `first_name`, `last_name`, `contact_number`, `address`, `payment_mode`, `created_at`) VALUES
+(1, 1, 'sdf', 'sdf', 'sf', 'asd', 'CreditDebitCard', '2024-02-05 12:35:57'),
+(2, 1, 'sdf', 'sdf', 'sf', 'asd', 'CreditDebitCard', '2024-02-05 12:37:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
   `image_url` varchar(255) NOT NULL,
   `product_name` varchar(70) NOT NULL,
@@ -37,10 +62,10 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product`
+-- Dumping data for table `products`
 --
 
-INSERT INTO `product` (`product_id`, `image_url`, `product_name`, `product_desc`, `product_price`, `product_group`) VALUES
+INSERT INTO `products` (`product_id`, `image_url`, `product_name`, `product_desc`, `product_price`, `product_group`) VALUES
 (2, './images/Petfood/Canned Food/Special Cat - Beef and Liver.png', 'Special Cat - Beef and Liver', 'This is a delicious canned cat food made with beef and liver.', 19.99, 'food'),
 (3, './images/Health and wellness products/Ascorbic Acid - Canicee.png', 'Ascorbic Acid - Canicee', 'Product description', 19.99, 'health'),
 (4, './images/Others/Collars/Cat Harness and Leash - Black.png', 'Cat Harness and Leash - Black', 'Product description', 19.99, 'accessory'),
@@ -63,7 +88,7 @@ INSERT INTO `product` (`product_id`, `image_url`, `product_name`, `product_desc`
 (23, './images/Others/Collars/Dog Collar & Leash - Purple.png', 'Dog Collar and Leash - Purple', 'Product description', 29.99, 'accessory'),
 (25, './images/Toys for various pets/Knotted Rope Dog Toy.png', 'Knotted Rope Dog Toy', 'Product description', 29.99, 'toy'),
 (26, './images/Toys for various pets/Kong Puppy Dog Toy.png', 'Kong Puppy Dog Toy', 'Product description', 29.99, 'toy'),
-(27, './images/Toys for various pets/Linen Ball Cat Toy.png', 'Linen Ball Cat Toy', 'Pussy toy', 29.99, 'toy'),
+(27, './images/Toys for various pets/Linen Ball Cat Toy.png', 'Linen Ball Cat Toy', 'desc', 29.99, 'toy'),
 (28, './images/Toys for various pets/Rubber Dog Ball.png', 'Rubber Dog Ball', 'Product Desc', 29.99, 'toy'),
 (29, './images/Toys for various pets/Wooven and Feather Ball Cat Toy.png', 'Wooven and Feather Ball Cat Toy', 'Product description', 29.99, 'toy'),
 (30, './images/Bedding and cages/Collapsible Pet Cage - Black.png', 'Collapsible Pet Cage - Black', 'Product description', 19.99, 'bedcage'),
@@ -84,25 +109,148 @@ INSERT INTO `product` (`product_id`, `image_url`, `product_name`, `product_desc`
 (45, './images/Others/Jolly Cat - Espresso Cat Litter.png', 'Jolly Cat - Espresso Cat Litter', 'Product description', 29.99, 'utility'),
 (46, './images/Others/Jolly Cat - Lemon Cat Litter.png', 'Jolly Cat - Lemon Cat Litter', 'Product description', 19.99, 'utility');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_requests`
+--
+
+CREATE TABLE `role_requests` (
+  `req_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `role` enum('seller','rider') NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `is_approved` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shopping_cart`
+--
+
+CREATE TABLE `shopping_cart` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `firstName` varchar(50) NOT NULL,
+  `lastName` varchar(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `is_admin` tinyint(4) NOT NULL DEFAULT 0,
+  `is_seller` tinyint(4) NOT NULL DEFAULT 0,
+  `is_rider` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `firstName`, `lastName`, `email`, `password`, `is_admin`, `is_seller`, `is_rider`) VALUES
+(1, 'Ali', 'Adieu', 'a@example.com', '$2y$10$bYwX6t3UeMUHJGKpU8VzTu7zLCAD6xigvxk.ClM8MISLgNvWIk.Ru', 1, 0, 0),
+(2, 'Bea', 'Bora', 'b@example.com', '$2y$10$uzBxnzwXy8ZSFNToZ7d1..oqygaBmIU7p.lOjtELdSbc0JzZO7RkC', 0, 0, 0),
+(3, 'Cecilia', 'Cecilion', 'c@example.com', '$2y$10$abbAhE30K8izwV/MWWgMI.kLZcwviSZO6D9b1yrZLqyci4XbSbPjS', 0, 0, 0);
+
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `product`
+-- Indexes for table `orders`
 --
-ALTER TABLE `product`
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `role_requests`
+--
+ALTER TABLE `role_requests`
+  ADD PRIMARY KEY (`req_id`);
+
+--
+-- Indexes for table `shopping_cart`
+--
+ALTER TABLE `shopping_cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `product`
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT for table `role_requests`
+--
+ALTER TABLE `role_requests`
+  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `shopping_cart`
+--
+ALTER TABLE `shopping_cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `shopping_cart`
+--
+ALTER TABLE `shopping_cart`
+  ADD CONSTRAINT `shopping_cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `shopping_cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

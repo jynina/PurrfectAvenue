@@ -33,7 +33,7 @@ if (isset($_SESSION['user'])){
 									$_SESSION['user'] = 'yes';
 									$_SESSION['user_email'] = $user['email'];
 									$_SESSION['user_id'] = $user['user_id'];
-									header("Location: dashboard.php");//after successful login, user will be redirected
+									header("Location: home.php");//after successful login, user will be redirected
 									die();
 								}else{
 									echo "<div><p class='errormsg'>Incorrect password<p></div>";

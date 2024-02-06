@@ -1,9 +1,12 @@
 <?php //redirected to dashboard if nakalogin na sila
 session_start();
-if (!isset($_SESSION['user'])){
+if (!isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
+    exit();
 }
 
+// Include database connection code (e.g., db_connection.php)
+include 'database.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +25,6 @@ if (!isset($_SESSION['user'])){
                 <ul class="navigation">
                 <?php 
                     if (isset($_SESSION['user_id'])) {
-                        require_once 'database.php';
                     
                         $user_id = $_SESSION['user_id'];
                     
@@ -40,7 +42,8 @@ if (!isset($_SESSION['user'])){
                         }
                     }
                     ?>
-                    <li><a href="dashboard.php">Home</a></li>
+                    <li><a href="shoppingcart.php">Cart</a></li>
+                    <li><a href="home.php">Home</a></li>
                     <li><a href="products.php">Products</a></li>
                     <li><a href="aboutus.php">About Us</a></li>
                     <li><a href="#" onclick="logoutAlert()">Log Out</a></li> <!-- logout in javascript -->
@@ -61,11 +64,9 @@ if (!isset($_SESSION['user'])){
                 </div>
             </div>
             <?php
-            // Include the database connection file
-            include "database.php";
 
             // Retrieve product data from the database
-            $sql = "SELECT * FROM product";
+            $sql = "SELECT * FROM products";
             $result = mysqli_query($conn, $sql);
 
             // Organize products by product group
@@ -105,6 +106,7 @@ if (!isset($_SESSION['user'])){
                     echo '<div class="product-description">' . $product['product_desc'] . '</div>';
                     echo '<div class="product-price">$' . $product['product_price'] . '</div>';
                     echo '<button class="add-to-cart" onclick="addToCart(\'' . $product['product_name'] . '\', \'' . $group . '\', ' . $product['product_price'] . ')" >Add to Cart</button>';
+                    // echo '<button class="add-to-cart" onclick="addToCart(\'' . $product['product_name'] . '\', \'' . $group . '\', ' . $product['product_price'] . ')" >Add to Cart</button>';
                     echo '</div>';
                     echo '</div>';
                 }

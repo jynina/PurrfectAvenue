@@ -10,14 +10,14 @@
 	display: flex; 
 	align-items: center; 
 	justify-content: center; 
-	background-image: url('/purrfect/images/Background/purr2.png'); 
+	background-image: url('./images/Background/purr2.png'); 
 	background-size: cover;
 } 
 .registration {
-	background-image: url('/purrfect/images/Background/purr3.png');
+	background-image: url('./images/Background/purr3.png');
 } 
 .logIn {
-	background-image: url('/purrfect/images/Background/purr2.png');
+	background-image: url('./images/Background/purr2.png');
 }
 .form {
 	position:fixed;
@@ -124,7 +124,7 @@
 	display: flex; 
 	align-items: flex-end; 
 	justify-content: center; 
-	background-image: url('../login_register/images/Background/purr.png'); 
+	background-image: url('./images/Background/purr.png'); 
 	background-repeat: no-repeat; 
 	background-size: cover;
 } 
@@ -216,7 +216,7 @@ section {
 	display: flex; 
 	justify-content: space-between; 
 	align-items: center; 
-	background-image: url(' images/Background/background.png'); 
+	background-image: url('./images/Background/background.png'); 
 	background-size: cover; 
 	background-position: center;
 } 

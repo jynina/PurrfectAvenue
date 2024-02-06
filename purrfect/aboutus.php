@@ -13,7 +13,7 @@
 			<div class="nav-bar">
 				<div class="toggle"></div>
 				<ul class="navigation"> 
-					<li><a href="dashboard.php">Home</a></li> 
+					<li><a href="home.php">Home</a></li> 
 					<li><a href="products.php">Product</a></li> 
 					<li><a href="aboutus.php">About Us</a></li> 		
 					<li><a href="#" onclick="logoutAlert()">Log Out</a></li>

@@ -17,6 +17,14 @@ function toggleCart() {
 }
 
 const cart = {};
+// function addToCart(item, category, price) {
+//     if (!cart[category]) {
+//         cart[category] = [];
+//     }
+//     cart[category].push({ item, price });
+//     updateCartDisplay();
+//     updateTotal();
+// }
 function addToCart(item, category, price) {
     if (!cart[category]) {
         cart[category] = [];
@@ -24,7 +32,31 @@ function addToCart(item, category, price) {
     cart[category].push({ item, price });
     updateCartDisplay();
     updateTotal();
+
+    // Send AJAX request to PHP backend to add item to cart
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'cartactions.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Update cart display after successful addition
+                const response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    cart[category].push({ item, price });
+                    updateCartDisplay();
+                    updateTotal();
+                } else {
+                    console.error('Failed to add item to cart');
+                }
+            } else {
+                console.error('Failed to send request');
+            }
+        }
+    };
+    xhr.send(`product_id=${item}&quantity=1`); // Adjust data as per your requirements
 }
+
 function updateCartDisplay() {
     const cartElement = document.getElementById('cart');
     const cartContentElement = document.getElementById('cart-content');
@@ -62,11 +94,71 @@ function updateCartDisplay() {
     }
 }
 
+// function removeFromCart(category, index) {
+//     if (cart[category] && cart[category].length > index) {
+//         cart[category].splice(index, 1);
+//         updateCartDisplay();
+//         updateTotal();
+//     }
+// }
+
 function removeFromCart(category, index) {
     if (cart[category] && cart[category].length > index) {
         cart[category].splice(index, 1);
         updateCartDisplay();
         updateTotal();
+    }
+
+    if (cart[category] && cart[category].length > index) {
+        const cart_item_id = cart[category][index].id; // Assuming each item in the cart has an 'id' property
+        // Send AJAX request to delete item from cart
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'cartActions.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        cart[category].splice(index, 1);
+                        updateCartDisplay();
+                        updateTotal();
+                    } else {
+                        console.error('Failed to remove item from cart');
+                    }
+                } else {
+                    console.error('Failed to send request');
+                }
+            }
+        };
+        xhr.send(`action=delete&cart_item_id=${cart_item_id}`);
+    }
+}
+
+function updateQuantity(category, index, newQuantity) {
+    if (cart[category] && cart[category].length > index) {
+        const cart_item_id = cart[category][index].id; // Assuming each item in the cart has an 'id' property
+        // Send AJAX request to update item quantity in cart
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'cartActions.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        cart[category][index].quantity = newQuantity;
+                        updateCartDisplay();
+                        updateTotal();
+                    } else {
+                        console.error('Failed to update item quantity in cart');
+                    }
+                } else {
+                    console.error('Failed to send request');
+                }
+            }
+        };
+        xhr.send(`action=update_quantity&cart_item_id=${cart_item_id}&new_quantity=${newQuantity}`);
     }
 }
 
@@ -89,9 +181,6 @@ function logoutAlert() {
     } else {
         //nothing will happen
     }
-}
-function PostAlert() {
-    
 }
 
 function ExitPostAlert() {

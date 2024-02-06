@@ -58,13 +58,15 @@ if (isset($_SESSION['user'])){
                 } else {
                 // Add the is_admin attribute and set its default value to false
                 $is_admin_default = false;
+                $is_rider_default = false;
+                $is_seller_default = false;
             
-                $sql = "INSERT INTO users (firstName, lastName, email, password, is_admin) VALUES (?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO users (firstName, lastName, email, password, is_admin, is_rider, is_seller) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $stmt = mysqli_stmt_init($conn);
                 $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
             
                 if ($prepareStmt) {
-                    mysqli_stmt_bind_param($stmt, "ssssi", $firstName, $lastName, $email, $passwordHash, $is_admin_default);
+                    mysqli_stmt_bind_param($stmt, "ssssiii", $firstName, $lastName, $email, $passwordHash, $is_admin_default, $is_rider_default, $is_seller_default);
                     mysqli_stmt_execute($stmt);
                     echo "<div><p class='alert-success'>Registration Successful.</p></div>";
                 } else {
