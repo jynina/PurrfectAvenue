@@ -17,44 +17,30 @@ function toggleCart() {
 }
 
 const cart = {};
-// function addToCart(item, category, price) {
-//     if (!cart[category]) {
-//         cart[category] = [];
-//     }
-//     cart[category].push({ item, price });
-//     updateCartDisplay();
-//     updateTotal();
-// }
-function addToCart(item, category, price) {
+// Function to add an item to the cart
+function addToCart(product_id, product_name, category, product_price) {
+    const product = { product_id, product_name, category, product_price };
     if (!cart[category]) {
         cart[category] = [];
     }
-    cart[category].push({ item, price });
+    cart[category].push(product);
     updateCartDisplay();
     updateTotal();
 
-    // Send AJAX request to PHP backend to add item to cart
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'cartactions.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                // Update cart display after successful addition
-                const response = JSON.parse(xhr.responseText);
-                if (response.success) {
-                    cart[category].push({ item, price });
-                    updateCartDisplay();
-                    updateTotal();
-                } else {
-                    console.error('Failed to add item to cart');
-                }
-            } else {
-                console.error('Failed to send request');
-            }
+    // Send AJAX request to add the product to the cart
+    $.ajax({
+        url: 'addtocart.php',
+        method: 'POST',
+        data: { product_id: product_id },
+        dataType: 'json',
+        success: function(response) {
+            alert(response.message);
+        },
+        error: function(xhr, status, error) {
+            alert('Error adding product to cart');
         }
-    };
-    xhr.send(`product_id=${item}&quantity=1`); // Adjust data as per your requirements
+    });
+    console.log("Product ID:", product_id);
 }
 
 function updateCartDisplay() {
@@ -76,15 +62,13 @@ function updateCartDisplay() {
                 const itemList = document.createElement('ul');
                 categoryItems.forEach((item, index) => {
                     const listItem = document.createElement('li');
-                    const priceText = typeof item.price === 'number' ? `$${item.price.toFixed(2)}` : 'Invalid Price';
-                    listItem.textContent = `${item.item} - ${priceText}`;
-
+                    const priceText = typeof item.product_price === 'number' ? `$${item.product_price.toFixed(2)}` : 'Invalid Price';
+                    listItem.textContent = `${item.product_name} - ${priceText}`;
+                
                     const removeButton = document.createElement('button'); 
-                    
                     removeButton.textContent = '\u00d7';
                     removeButton.addEventListener('click', () => removeFromCart(category, index));
-
-                    listItem.appendChild(removeButton);
+                
                     listItem.style.listStyle = 'none';
                     itemList.appendChild(listItem);
                 });
@@ -94,80 +78,12 @@ function updateCartDisplay() {
     }
 }
 
-// function removeFromCart(category, index) {
-//     if (cart[category] && cart[category].length > index) {
-//         cart[category].splice(index, 1);
-//         updateCartDisplay();
-//         updateTotal();
-//     }
-// }
-
-function removeFromCart(category, index) {
-    if (cart[category] && cart[category].length > index) {
-        cart[category].splice(index, 1);
-        updateCartDisplay();
-        updateTotal();
-    }
-
-    if (cart[category] && cart[category].length > index) {
-        const cart_item_id = cart[category][index].id; // Assuming each item in the cart has an 'id' property
-        // Send AJAX request to delete item from cart
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'cartActions.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
-                    if (response.success) {
-                        cart[category].splice(index, 1);
-                        updateCartDisplay();
-                        updateTotal();
-                    } else {
-                        console.error('Failed to remove item from cart');
-                    }
-                } else {
-                    console.error('Failed to send request');
-                }
-            }
-        };
-        xhr.send(`action=delete&cart_item_id=${cart_item_id}`);
-    }
-}
-
-function updateQuantity(category, index, newQuantity) {
-    if (cart[category] && cart[category].length > index) {
-        const cart_item_id = cart[category][index].id; // Assuming each item in the cart has an 'id' property
-        // Send AJAX request to update item quantity in cart
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'cartActions.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
-                    if (response.success) {
-                        cart[category][index].quantity = newQuantity;
-                        updateCartDisplay();
-                        updateTotal();
-                    } else {
-                        console.error('Failed to update item quantity in cart');
-                    }
-                } else {
-                    console.error('Failed to send request');
-                }
-            }
-        };
-        xhr.send(`action=update_quantity&cart_item_id=${cart_item_id}&new_quantity=${newQuantity}`);
-    }
-}
-
 function updateTotal() {
     const totalElement = document.getElementById('total');
     let overallTotal = 0;
     for (const category in cart) {
         if (cart.hasOwnProperty(category)) {
-            overallTotal += cart[category].reduce((sum, item) => sum + item.price, 0);
+            overallTotal += cart[category].reduce((sum, item) => sum + item.product_price, 0);
         }
     }
 

@@ -9,7 +9,7 @@
 <body> 
 	<section class="contact">
 		<header>
-			<a href="dashboard.php"><img src="images/Background/logo.png" class="logo"></a> 
+			<a href="home.php"><img src="images/Background/logo.png" class="logo"></a> 
 			<div class="nav-bar">
 				<div class="toggle"></div>
 				<ul class="navigation"> 

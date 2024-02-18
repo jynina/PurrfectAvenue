@@ -40,6 +40,10 @@ if (isset($_SESSION['user_id'])) {
 
     <label for="productPrice">Product Price</label>
     <input type="text" name="productPrice" required>
+
+    <label for="stockQuantity">Stock Quantity</label>
+    <input type="number" name="stockQuantity" required>
+    
 <!-- -->
 
     <div class="product-categories">

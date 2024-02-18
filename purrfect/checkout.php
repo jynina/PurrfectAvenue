@@ -5,8 +5,18 @@ session_start(); // Start the session if not already started
 if (isset($_SESSION['user_id'])) {
     // The user is logged in
     $user_id = $_SESSION['user_id'];
-    
-    // Your other code here
+
+    // Include the database connection file
+    include_once 'database.php';
+
+    // Fetch user's registered address from the database
+    $sql = "SELECT address FROM users WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->bind_result($registered_address);
+    $stmt->fetch();
+    $stmt->close();
 } else {
     // Redirect to the login page or handle unauthorized access
     header("Location: login.php");
@@ -25,41 +35,48 @@ if (isset($_SESSION['user_id'])) {
 </head>
 <body>
 <header>
-	<a href="products.php"><img src="images/Background/back-arrow.png" class="logo" onclick="ExitPostAlert()"></a> 
+	<a href="shoppingcart.php"><img src="images/Background/back-arrow.png" class="logo" onclick="ExitPostAlert()"></a> 
 </header> 
 <div class="container">
     <div class="form-container">
     <div class="form register">
-    <form method="post" action="checkoutprocess.php"  onsubmit="return PostAlert()">
-                
-    <label for="imgurl">First Name</label>
-    <input type="text" name="Fname" required>
-
-    <label for="productName">Last Name</label>
-    <input type="text" name="Lname" required>
-
-    <label for="productPrice">Contact Number</label>
-    <input type="text" name="contactnum" required>
-
-    <label for="address">Address</label>
-    <input type="text" name="address" required>
+    <form method="post" action="checkoutprocess.php" onsubmit="return PostAlert()">
+    
+    <label for="address">Choose Address:</label>
+    <select name="address_option" id="address_option">
+        <option value="registered" selected>Use Registered Address</option>
+        <option value="new">Use New Address</option>
+    </select>
+    <br>
+    <div id="new_address" style="display: none;">
+        <label for="new_address">New Address</label>
+        <input type="text" name="new_address">
+    </div>
 <!-- -->
-
+    <label for="paymentMode">Payment Mode</label>
     <div class="payment-mode">
-    <label for="paymentMode">Product Category <span style="color: red;">REQUIRED</span><br><br></label>
     <select name="paymentMode" id="paymentMode">
     <option value="CashonDelivery">Cash on Delivery</option>
-    <option value="CreditDebitCard">Credit/Debit Card</option>
-    <option value="E-Wallet">E-Wallet</option>
 </select>
     </div>
 <!-- -->
-    
     <input type="submit" value="Checkout">
 </form>
 </div>
 </div>
 </div>
 <script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('address_option').addEventListener('change', function() {
+        var selected_option = this.value;
+        if (selected_option === 'new') {
+            document.getElementById('new_address').style.display = 'block';
+        } else {
+            document.getElementById('new_address').style.display = 'none';
+        }
+    });
+});
+</script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php //redirected to dashboard if nakalogin na sila
 session_start();
 if (isset($_SESSION['user'])){
-    header("Location: dashboard.php");
+    header("Location: home.php");
 }
 ?>
 <!DOCTYPE html>

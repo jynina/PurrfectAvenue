@@ -17,13 +17,14 @@ if (!isset($_SESSION['user'])){
 <body> 
 	<section>
 		<header>
-			<a href="dashboard.php"><img src="images/Background/logo.png" class="logo"></a> 
+			<a href="home.php"><img src="images/Background/logo.png" class="logo"></a> 
 			<div class="nav-bar">
 				<div class="toggle"></div>
 				<ul class="navigation"> 
 					<li><a href="home.php">Home</a></li> 
 					<li><a href="products.php">Products</a></li> 
 					<li><a href="aboutus.php">About Us</a></li> 	
+					<li><a href="settings.php">User Settings</a></li> 
 					<li><a href="#" onclick="logoutAlert()">Log Out</a></li> 
 				</ul> 
 			</div>
