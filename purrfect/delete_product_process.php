@@ -20,7 +20,7 @@ if ($product_id) {
         // Check if rows were affected to determine success
         if ($stmt->affected_rows > 0) {
             // Redirect or inform the user of success
-            header('Location: products.php?delete=success');
+            header('Location: productsadmin.php?delete=success');
             exit; // Exit after redirect
         } else {
             // Product not found or already deleted

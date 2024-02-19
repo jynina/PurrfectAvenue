@@ -10,7 +10,6 @@ if (isset($_POST['order_id'])) {
     $updateStmt->bind_param("i", $orderId);
     $updateStmt->execute();
     $updateStmt->close();
-
     // Retrieve the order details from the database
     $stmt = $conn->prepare("SELECT productid, quantity FROM order_items WHERE orderid = ?");
     $stmt->bind_param("i", $orderId);
@@ -40,11 +39,13 @@ if (isset($_POST['order_id'])) {
         $updateStockStmt->bind_param("ii", $quantityReceived, $productId);
         $updateStockStmt->execute();
         $updateStockStmt->close();
+        
+        // Close the checkStmt within the loop
+        $checkStmt->close();
     }
 
     // Close the prepared statements
     $stmt->close();
-    $checkStmt->close();
 
     // Redirect the user back to the orders page or any other page as needed
     header("Location: orderspage.php");
@@ -55,3 +56,4 @@ if (isset($_POST['order_id'])) {
     exit();
 }
 ?>
+

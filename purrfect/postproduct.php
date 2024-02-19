@@ -25,7 +25,7 @@ if (isset($_SESSION['user_id'])) {
 </head>
 <body>
 <header>
-	<a href="products.php"><img src="images/Background/back-arrow.png" class="logo" onclick="ExitPostAlert()"></a> 
+	<a href="productsadmin.php"><img src="images/Background/back-arrow.png" class="logo" onclick="ExitPostAlert()"></a> 
 </header> 
 <div class="container">
     <div class="form-container">

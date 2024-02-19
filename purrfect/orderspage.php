@@ -27,26 +27,39 @@ $stmt->close();
 </head>
 <style>
 /* General page styling */
-.shoppingcart {
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
+    padding-top: 110px;
     background-color: #f4f4f4;
 }
-
+.history {
+    display: block;
+    margin-top: 90px;
+    width: 70%;
+    margin: auto    ;
+}
 h1 {
     color: #333;
 }
 
-/* Table styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+/* User Info Styling */
+.user-info {
+    background-color: #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+/* Table styling */
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-table, th, td {
+    border: 1px solid #ddd; 
+    padding: 8px;
 }
 
 th, td {
@@ -58,75 +71,54 @@ th {
     background-color: #C55A11;
     color: white;
 }
-
-td img {
-    margin-right: 10px;
-    vertical-align: middle;
+td ul li {
+    list-style-type: none; /* Remove bullet points */
+}
+.order-details {
+    margin-top: 60px;
 }
 
-/* Ensure each cell occupies one column width */
-table td {
-    width: auto;
+.order-details th, .order-details td {
     text-align: left;
 }
-
-/* Align specific columns to the right */
-table td:nth-child(2), 
-table td:nth-child(3), 
-table td:nth-child(4), 
-table td:nth-child(5) {
+.order {
     text-align: right;
 }
-
-/* Button styling */
-input[type="submit"] {
-    background-color: #474847;
-    color: white;
-    padding: 6px 10px;
-    margin: 4px 2px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #C55A11;
-}
-
-input[type="number"] {
-    background-color: transparent;
-    color: #333;
-    padding: 6px;
-    margin: 4px 2px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-/* Checkout link styling */
-.shpcrt {
-    text-align: right;
-}
-
-a {
+/* Links styling */
+a.first, a.second, .order-received input[type="submit"] {
+    margin-top: 20px;
     display: inline-block;
-    background-color: #C55A11;
+    background: #C55A11;
     color: white;
     padding: 10px 20px;
-    margin: 20px 0;
     text-decoration: none;
     border-radius: 5px;
 }
-
-.first {
-    margin-right: 10px;
+.order-total-row, .order-row {
+    font-weight: bold; /* Make the text bold */
+    background-color: #f0f0f0; /* Light grey background for slight emphasis */
 }
 
-a:hover {
-    background-color: #b95613;
+a.second, .order-received input[type="submit"] {
+    background: #333;
 }
 </style>
 <body>
-    
+    <header>
+        <a href="home.php"><img src="images/Background/logo.png" class="logo"></a>
+        <div class="nav-bar">
+            <div class="toggle"></div>
+            <ul class="navigation">
+                <li><a href="shoppingcart.php">Cart</a></li>
+                <li><a href="orderspage.php">My Orders</a></li>
+                <li><a href="orderhistory.php">Order History</a></li>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="products.php">Products</a></li>
+                <li><a href="settings.php">User Settings</a></li>
+                <li><a href="#" onclick="logoutAlert()">Log Out</a></li>
+            </ul>
+        </div>
+    </header>
     <?php if (empty($result)): ?>
         <div class="empty-cart" style="background-image: url('/purrfect/images/Background/gen.png'); background-size: cover; justify-content:center; align-items: center; width: 100%; height: 98vh; display: flex; flex-direction: column;">
             <p style="font-size: 30px;">You haven't ordered anything yet.</p>
@@ -136,56 +128,80 @@ a:hover {
             </div>
         </div>
     <?php else: ?>
+<div class="history">
+        <div class="user-info">
+            <p><strong>Name:</strong> <?php echo $result[0]['name']; ?></p>
+            <p><strong>Contact Number:</strong> <?php echo $result[0]['contact_num']; ?></p>
+            <p><strong>Address:</strong> <?php echo $result[0]['address']; ?></p>
+        </div>
         <h1>My Orders</h1>
-        <table>
-            <?php foreach ($result as $row): ?>
-                <?php
-                $orderId = $row['orderid'];
-                $Fname = $row['name'];
-                $contactnum = $row['contact_num'];
-                $address = $row['address'];
-                $paymentMode = $row['mode_of_payment'];
-                $totalPrice = $row['total_price'];
-                $dateOrdered = $row['order_date'];
-
-                // Retrieve products ordered for each order
-                $stmt = $conn->prepare("SELECT products.product_name, order_items.quantity FROM order_items INNER JOIN products ON order_items.productid = products.product_id WHERE orderid = ?");
-                $stmt->bind_param("i", $orderId);
-                $stmt->execute();
-                $resultItems = $stmt->get_result();
-                ?>
-                <tr>
-                    <td><strong>Name: </strong><?php echo $Fname; ?></td>
-                    <td><strong>Contact Number: </strong><?php echo $contactnum; ?></td>
-                    <td><strong>Address: </strong><?php echo $address; ?></td>
-                    <td><strong>Mode of Payment: </strong><?php echo $paymentMode; ?></td>
-                    <td><strong>Total Price: </strong><?php echo $totalPrice; ?></td>
-                    <td><strong>Date Ordered: </strong><?php echo $dateOrdered; ?></td>
-                    <td><strong>Products Ordered: </strong>
-                        <ul>
-                            <?php while ($item = $resultItems->fetch_assoc()): ?>
-                                <li><?php echo "{$item['product_name']} - Quantity: {$item['quantity']}"; ?></li>
-                            <?php endwhile; ?>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <!-- Add a button for "Order Received" -->
-                    <td>
-                        <form action="order_received.php" method="post" onsubmit="return confirm('Are you sure you want to confirm receiving this order?');">
-                            <input type="hidden" name="order_id" value="<?php echo $orderId; ?>">
-                            <input type="submit" value="Order Received">
-                        </form>
-                    </td>
-                </tr>
-                <tr><td colspan="9">&nbsp;</td></tr> <!-- Add an empty row as a separator -->
-            <?php endforeach; ?>
-        </table>
-        <div  style="text-align: right;">
+        <?php foreach ($result as $row): ?>
+            <?php
+            // Define $orderId within the loop
+            $orderId = $row['orderid'];
+            ?>
+            <div class="order-details">
+                <table class="orders-table">
+                    <tr class="order-row">
+                        <td><strong>Date Ordered:</strong></td>
+                        <td><?php echo htmlspecialchars($row['order_date'], ENT_QUOTES, 'UTF-8'); ?></td>
+                    </tr>
+                    <tr class="order-row">
+                        <td><strong>Mode of Payment:</strong></td>
+                        <td><?php echo htmlspecialchars($row['mode_of_payment'], ENT_QUOTES, 'UTF-8'); ?></td>
+                    </tr>
+                </table> 
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Products Ordered</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $stmt = $conn->prepare("SELECT products.product_name, order_items.quantity, products.product_price, products.image_url FROM order_items INNER JOIN products ON order_items.productid = products.product_id WHERE orderid = ?");
+                        $stmt->bind_param("i", $row['orderid']);
+                        $stmt->execute();
+                        $resultItems = $stmt->get_result(); 
+                        $orderTotal = 0; 
+                        while ($item = $resultItems->fetch_assoc()):
+                            $productTotal = $item['product_price'] * $item['quantity']; // Calculate total price per product
+                            $orderTotal += $productTotal; // Add to order total
+                        ?>
+                        <tr>
+                            <td>
+                            <img src="<?php echo $item['image_url']; ?>" alt="<?php echo $item['product_name']; ?>" style="width: 100px;">
+                            <?php echo $item['product_name']; ?>
+                            </td>
+                            <td>x<?php echo $item['quantity']; ?></td>
+                            <td><?php echo $productTotal; ?></td>
+                        </tr>
+                        <?php endwhile; ?>
+                        <tr class="order-total-row">
+                            <td colspan="2" style="text-align: right;"><strong>Order Total:</strong></td>
+                            <td><?php echo $orderTotal; ?></td>
+                        </tr> 
+                    </tbody>
+                </table>
+                <td>
+                    <div class="order">
+                    <form action="order_received.php" method="post" onsubmit="return confirm('Are you sure you want to confirm receiving this order?');">
+                        <!-- Pass the correct $orderId value -->
+                        <input type="hidden" name="order_id" value="<?php echo $orderId; ?>">
+                        <input type="submit" value="Order Received">
+                    </form>
+                    </div>
+                </td>
+            </div>
+        <?php endforeach; ?>
+        <div style="text-align: right; margin-top: 20px;">
             <a href="products.php" class="first">Back</a>
             <a href="shoppingcart.php" class="second">Shopping Cart</a>
         </div>
     <?php endif; ?>
+</div>
 </body>
 </html>
 

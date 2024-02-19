@@ -28,14 +28,14 @@ if ($product_id && $imgurl && $productName && $productPrice && $productDesc && $
 
     if ($stmt->execute()) {
         // Update the stock quantity
-        $updateStockQuery = "UPDATE stocks SET stock_quantity=? WHERE product_id=?";
+        $updateStockQuery = "UPDATE stocks SET quantity=? WHERE product_id=?";
         $stmt = $conn->prepare($updateStockQuery);
         $stmt->bind_param("ii", $stockQuantity, $product_id);
 
         if ($stmt->execute()) {
             // Commit the transaction if both updates are successful
             $conn->commit();
-            header('Location: products.php?update=success');
+            header('Location: productsadmin.php?update=success');
             exit;
         } else {
             // Rollback the transaction if the stock update fails

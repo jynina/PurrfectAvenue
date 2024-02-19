@@ -50,7 +50,7 @@ mysqli_close($conn); // Close the database connection
 </head>
 <body>
     <a href="home.php">Back to Home</a>
-    <a href="products.php">Back to Products</a>
+    <a href="productsadmin.php">Back to Products</a>
     <a href="postproduct.php">Post Another Product</a>
 </body>
 </html>

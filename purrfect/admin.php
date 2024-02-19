@@ -26,7 +26,7 @@ if (!isset($_SESSION['user'])){
 				</ul> 
 			</div>
 		</header> 
-	<div class="content">
+	<div class="content3">
 		<div class="textBox">
 			<?php
 			if (isset($_SESSION['user_id'])) {
@@ -47,10 +47,9 @@ if (!isset($_SESSION['user'])){
 			?>
 			<h2>Admin Panel</h2> 
 			<a href="user_list.php">View Users</a>
-            <a href="orders_list.php">View Active Orders</a>
 			<a href="orderhistoryadmin.php">View Completed Orders</a>
+            <a href="productsadmin.php">View Products</a>
 			<a href="orderreport.php">View Order Report</a>
-            <a href="products.php">View Products</a>
 		</div> 
 	</div>
 	<ul class="sci"> 

@@ -32,7 +32,7 @@ CREATE TABLE `order_items` (
   KEY `fk_product_id` (`productid`),
   CONSTRAINT `fk_product_id` FOREIGN KEY (`productid`) REFERENCES `products` (`product_id`) ON DELETE CASCADE,
   CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`orderid`) REFERENCES `orders` (`orderid`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `order_items` (
 
 LOCK TABLES `order_items` WRITE;
 /*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
-INSERT INTO `order_items` VALUES (8,3,11,1),(9,3,12,2),(14,5,12,8),(15,5,13,1),(18,7,11,1),(19,7,12,1),(20,7,13,1),(21,8,13,1),(22,8,12,1),(31,13,12,1),(32,14,12,1),(33,14,11,1),(34,15,12,1),(35,15,13,1),(36,16,13,1),(37,16,11,1),(38,17,12,1),(39,18,2,1);
+INSERT INTO `order_items` VALUES (8,3,11,1),(9,3,12,2),(14,5,12,8),(15,5,13,1),(18,7,11,1),(19,7,12,1),(20,7,13,1),(21,8,13,1),(22,8,12,1),(31,13,12,1),(32,14,12,1),(33,14,11,1),(34,15,12,1),(35,15,13,1),(36,16,13,1),(37,16,11,1),(38,17,12,1),(39,18,2,1),(40,19,12,3),(41,19,13,2),(42,19,11,2),(43,19,15,1),(44,20,12,2),(45,20,13,2),(46,21,11,1),(47,21,12,1),(48,22,12,1),(49,22,13,1);
 /*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-18 16:47:30
+-- Dump completed on 2024-02-19 19:48:03

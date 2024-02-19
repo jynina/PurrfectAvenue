@@ -67,25 +67,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style1.css">
     <title>Order Report</title>
 </head>
 <body>
-    <header>
-        <a href="home.php"><img src="images/Background/logo.png" class="logo"></a> 
-        <div class="nav-bar">
-            <div class="toggle"></div>
-            <ul class="navigation"> 
-                <li><a href="user_list.php">Users</a></li> 
-                <li><a href="orders_list.php">Active Orders</a></li>
-                <li><a href="orderhistoryadmin.php">Completed Orders</a></li>
-                <li><a href="home.php">Admin Panel</a></li> 
-            </ul> 
-        </div>
-    </header> 
+<header>
+    <a href="home.php"><img src="images/Background/logo.png" class="logo"></a> 
+    <div class="nav-bar">
+        <div class="toggle"></div>
+        <ul class="navigation"> 
+            <li><a href="user_list.php">Users</a></li> 
+            <li><a href="orders_list.php">Active Orders</a></li>
+            <li><a href="orderhistoryadmin.php">Completed Orders</a>
+            <li><a href="productsadmin.php">Products</a>
+            <li><a href="orderreport.php">Order Report</a></li>
+            <li><a href="home.php">Admin Panel</a></li> 
+        </ul> 
+    </div>
+</header>    
 
     <div class="container-4">
         <h2>Order Report</h2>
-        <form method="post" action="#">
+        <form method="post" action="#" class="date">
             <label for="date_from">From:</label>
             <input type="datetime-local" id="date_from" name="date_from" value="<?php echo $dateFrom; ?>">
             <label for="date_to">To:</label>
@@ -94,13 +97,25 @@
         </form>
         <div>
         <h3>Summary Statistics</h3>
-        <ul>
-            <li>Total Orders: <?php echo $totalOrders; ?></li>
-            <li>Total Revenue: $<?php echo $totalRevenue; ?></li>
-            <li>Average Order Value: $<?php echo number_format($averageOrderValue, 2); ?></li>
-        </ul>
         </div>
-        <a href="home.php">Back to Admin Panel</a>
+        <table>
+            <!--<tr>
+                <th>Statistics</th>
+                <th>Value</th>
+            </tr>-->
+            <tr>
+                <td>Total Orders</td>
+                <td><?php echo $totalOrders; ?></td>
+            </tr>
+            <tr>
+                <td>Total Revenue</td>
+                <td>₱<?php echo $totalRevenue; ?></td>
+            </tr>
+            <tr>
+                <td>Average Order Value</td>
+                <td>₱<?php echo number_format($averageOrderValue, 2); ?></td>
+            </tr>
+        </table>
         <table>
             <tr>
                 <th>Order ID</th>
@@ -113,7 +128,6 @@
                 <th>Order Date</th>
                 <th>Received Date</th>
                 <th>Status</th>
-                <th>Action</th>
             </tr>
             <?php foreach ($orders as $order): ?>
                 <tr>
@@ -127,13 +141,13 @@
                     <td><?php echo $order['order_date']; ?></td>
                     <td><?php echo $order['received_date']; ?></td>
                     <td><?php echo $order['status']; ?></td>
-                    <td>
-                        <a href="update_order.php?orderid=<?php echo $order['orderid']; ?>">Update</a>
-                    </td>
+
                 </tr>
             <?php endforeach; ?>
         </table>
-        
+        <div class="button">
+        <a href="home.php" class="back-listbtn">Back to Home</a>
+        </div>
     </div>
 </body>
 </html>

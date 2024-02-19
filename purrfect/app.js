@@ -10,6 +10,30 @@ const toggleMenu = () => {
 const menuToggle = document.querySelector('.toggle');
 menuToggle.addEventListener('click', toggleMenu); 
 
+// swiper initialization for images in index.html 
+document.addEventListener("DOMContentLoaded", function () { 
+    var swiperContainer = document.querySelector(".mySwiper");
+    if (swiperContainer) {
+        var swiper = new Swiper(".mySwiper", {
+            effect: "coverflow", 
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto", 
+            coverflowEffect: {
+                rotate: 0, 
+                stretch: 0, 
+                depth: 300, 
+                modifier: 1, 
+                slideShadows: true, 
+            }, 
+            pagination: {
+                el: ".swiper-pagination", 
+            }, 
+            loop: true,
+        }); 
+        }
+    });
+    
 // for products page
 function toggleCart() {
     const cartElement = document.getElementById('cart');

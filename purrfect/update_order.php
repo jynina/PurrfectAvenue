@@ -54,10 +54,17 @@
         $total_price = $_POST['total_price'];
         $status = $_POST['status'];
 
+        // Check if status is "Received" and set received_date accordingly
+        if ($status == 'Received') {
+            $received_date = date('Y-m-d H:i:s'); // Current date and time
+        } else {
+            $received_date = null; // Nullify received_date if status is not "Received"
+        }
+
         // Update order in database
-        $sql = "UPDATE orders SET name = ?, contact_num = ?, address = ?, mode_of_payment = ?, total_price = ?, status = ? WHERE orderid = ?";
+        $sql = "UPDATE orders SET name = ?, contact_num = ?, address = ?, mode_of_payment = ?, total_price = ?, status = ?, received_date = ? WHERE orderid = ?";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "sssssdi", $name, $contact_num, $address, $mode_of_payment, $total_price, $status, $orderid);
+        mysqli_stmt_bind_param($stmt, "sssssssi", $name, $contact_num, $address, $mode_of_payment, $total_price, $status, $received_date, $orderid);
         mysqli_stmt_execute($stmt);
 
         // Redirect to view_orders.php after updating
@@ -71,10 +78,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Order</title>
+    <script>
+        function showAlert() {
+            return confirm("Are you sure you want to update the order?");
+        }
+    </script>
 </head>
 <body>
     <h1>Update Order</h1>
-    <form method="post">
+    <form method="post" onsubmit="showAlert()">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="<?php echo $order['name']; ?>"><br>
         <label for="contact_num">Contact Number:</label>
@@ -86,10 +98,11 @@
         <label for="total_price">Total Price:</label>
         <input type="number" id="total_price" name="total_price" value="<?php echo $order['total_price']; ?>"><br>
         <label for="status">Status:</label>
-        <select id="status" name="status">
-            <option value="Received" <?php echo ($order['status'] == 'Received') ? 'selected' : ''; ?>>Received</option>
-            <option value="NotReceived" <?php echo ($order['status'] == 'NotReceived') ? 'selected' : ''; ?>>Not Received</option>
-        </select><br>
+        <input type="radio" id="received" name="status" value="Received" <?php echo ($order['status'] == 'Received') ? 'checked' : ''; ?>>
+        <label for="received">Received</label><br>
+
+        <input type="radio" id="NotReceived" name="status" value="NotReceived" <?php echo ($order['status'] == 'NotReceived') ? 'checked' : ''; ?>>
+        <label for="notReceived">Not Received</label><br>
         <input type="submit" name="update" value="Update">
     </form>
 </body>

@@ -26,23 +26,25 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order History (Admin)</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style1.css">
 </head>
 <body>
 <header>
-        <a href="home.php"><img src="images/Background/logo.png" class="logo"></a> 
-        <div class="nav-bar">
-            <div class="toggle"></div>
-            <ul class="navigation"> 
-                <li><a href="user_list.php">Users</a></li> 
-                <li><a href="orders_list.php">Active Orders</a></li>
-                <li><a href="orderhistoryadmin.php">Completed Orders</a></li>
-                <li><a href="home.php">Admin Panel</a></li> 
-            </ul> 
-        </div>
-    </header> 
+    <a href="home.php"><img src="images/Background/logo.png" class="logo"></a> 
+    <div class="nav-bar">
+        <div class="toggle"></div>
+        <ul class="navigation"> 
+            <li><a href="user_list.php">Users</a></li> 
+            <li><a href="orders_list.php">Active Orders</a></li>
+            <li><a href="orderhistoryadmin.php">Completed Orders</a>
+            <li><a href="productsadmin.php">Products</a>
+            <li><a href="orderreport.php">Order Report</a></li>
+            <li><a href="home.php">Admin Panel</a></li> 
+        </ul> 
+    </div>
+</header>    
     <div class="container-4">
-    <h1>Order History (Admin)</h1>
-
+    <h2>Order History</h2>
     <table>
         <tr>
             <th>Order ID</th>
@@ -69,8 +71,9 @@ $result = $conn->query($sql);
         }
         ?>
     </table>
-
-    <a href="home.php">Back to Home</a>
+    </div>
+    <div class="button">
+    <a href="home.php" class="back-listbtn">Back to Home</a>
     </div>
 </body>
 </html>

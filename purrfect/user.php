@@ -11,8 +11,10 @@ if (!isset($_SESSION['user'])){
 <head> 
 	<meta charset="UTF-8"> 
 	<title>Purrfect Pet Services</title> 
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="style.css"> 
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
 </head> 
 <body> 
 	<section>
@@ -24,7 +26,6 @@ if (!isset($_SESSION['user'])){
 					<li><a href="home.php">Home</a></li> 
 					<li><a href="products.php">Products</a></li> 
 					<li><a href="aboutus.php">About Us</a></li> 	
-					<li><a href="settings.php">User Settings</a></li> 
 					<li><a href="#" onclick="logoutAlert()">Log Out</a></li> 
 				</ul> 
 			</div>
@@ -43,20 +44,26 @@ if (!isset($_SESSION['user'])){
 				// Check if the query was successful
 				if ($result) {
 					$user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-						echo "<h2>Welcome, <span-1>{$user['firstName']} {$user['lastName']}!</span-1></h2><br>";
-
+						echo "<h4>Pets Thrive, <span-1>We Provide.</span-1></h4>";
+						echo "<p>Welcome, {$user['firstName']} {$user['lastName']}! Explore top-tier pet love at \"Purrfect Pet Store,\" your ultimate online destination for pet products. 
+						We provide an extensive selection of high-quality accessories, food, and cages to cater to all your pet needs.</p>";
 				}
 			}
 			?>
-			<h2>Pets Thrive, <span-1>We Provide.</span-1></h2> 
-			<p>Experience exceptional pet care at "Purrfect Pet Services," your one-stop online destination for all things pets! 
-			From adopting your new furry family member to finding top-quality accessories, food, and cages, we've got it all. 
-			At "Purrfect Pet Services," we're committed to making pet care seamless and accessible, offering a range of services 
-			that go beyond expectations. Your pets deserve the finest, and we're here to deliver unparalleled convenience and care 
-			for every step of their journey. Have questions or concerns about your pet? Share them with us, and will provide you with 
-			the best guidance possible.</p> 
 			<a href="products.php">Buy Now</a> 
 		</div> 
+		<div class="imgBox"> 
+			<div class="swiper mySwiper">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide"><img src="./images/Background/icedcoffee1.png"/></div> 
+					<div class="swiper-slide"><img src="./images/Background/icedcoffee2.png"/></div> 
+					<div class="swiper-slide"><img src="./images/Background/icedcoffee3.png"/></div>
+					<div class="swiper-slide"><img src="./images/Background/icedcoffee4.png"/></div> 
+					<div class="swiper-slide"><img src="./images/Background/cappuccino.png"/></div>
+					<div class="swiper-slide"><img src="./images/Background/regularcoffee.png"/></div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<ul class="sci"> 
 		<li><a href="aboutus.php"><i class='bx bxl-facebook' ></i></li>

@@ -45,7 +45,6 @@ if (isset($_GET['user_id'])) {
 			<div class="toggle"></div>
 			<ul class="navigation"> 
                 <li><a href="user_list.php">Users</a></li> 
-                <li><a href="orders_list.php">Orders</a></li>
 				<li><a href="home.php">Admin Panel</a></li> 
 			</ul> 
 		</div>

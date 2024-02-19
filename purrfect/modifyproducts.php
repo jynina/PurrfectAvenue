@@ -51,7 +51,7 @@ if (isset($_GET['product_id'])) {
     <!-- Include your CSS here. -->
 </head>
 <header>
-    <a href="products.php"><img src="images/Background/back-arrow.png" class="logo" onclick="ExitPostAlert()"></a> 
+    <a href="productsadmin.php"><img src="images/Background/back-arrow.png" class="logo" onclick="ExitPostAlert()"></a> 
 </header>
 <body>
 <div class="container">
@@ -83,7 +83,7 @@ if (isset($_GET['product_id'])) {
 
             <!-- Stock Quantity -->
            <!-- Stock Quantity -->
-           <label for="stockQuantity">Stock Quantity: (Current stock: <?php echo isset($product['stock_quantity']) ? htmlspecialchars($product['stock_quantity']) : '0'; ?>)</label>
+           <label for="stockQuantity">Stock Quantity:</label>
             <input type="number" name="stockQuantity" value="<?php echo isset($product['stock_quantity']) ? htmlspecialchars($product['stock_quantity']) : ''; ?>" required>
 
             <input type="submit" value="Update Product">

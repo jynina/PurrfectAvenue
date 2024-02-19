@@ -2,11 +2,6 @@
     session_start();
     include_once 'database.php';
 
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: home.php");
-        exit();
-    }
-
     if (!empty($_SESSION['cart'])) {
         $totalPrice = 0;
         ?>
@@ -111,8 +106,8 @@
                     background-color: #b95613;
                 }
             </style>
-            <!--<link rel="stylesheet" href="style.css">-->
         </head>
+        
         <body class="shoppingcart">
         <h1>Shopping Cart</h1>   
         <table>

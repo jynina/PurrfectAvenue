@@ -41,7 +41,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Ali','Adieu','a@example.com','$2y$10$bYwX6t3UeMUHJGKpU8VzTu7zLCAD6xigvxk.ClM8MISLgNvWIk.Ru',1,NULL,NULL),(2,'Bea','Bora','b@example.com','$2y$10$uzBxnzwXy8ZSFNToZ7d1..oqygaBmIU7p.lOjtELdSbc0JzZO7RkC',0,NULL,NULL),(4,'K','K','k@example.com','$2y$10$0FmzcAnwbZe1F7jE4f30x.vYtkn8.94e8Urblad/iljg4TdcGPG/S',1,NULL,NULL),(5,'A','C','ac@email.com','$2y$10$JbrqlMYFsbmG4NvQhUf4eehRvgUeA7ZWUwwQvUIXIXUYGzTD5G9e6',0,NULL,NULL),(7,'Din','Dinner','dinner@email.com','$2y$10$PdzKqycVHCgZv5CSwAD7ROYdzGrIJ/fkqb2uW5UZzMTGgVDCtM6lW',0,'09560624024','Indonesia');
+INSERT INTO `users` VALUES (1,'Ali','Adieu','a@example.com','$2y$10$bYwX6t3UeMUHJGKpU8VzTu7zLCAD6xigvxk.ClM8MISLgNvWIk.Ru',1,NULL,NULL),(2,'Bea','Bora','b@example.com','$2y$10$uzBxnzwXy8ZSFNToZ7d1..oqygaBmIU7p.lOjtELdSbc0JzZO7RkC',0,'worlf','09560624023'),(4,'K','K','k@example.com','$2y$10$0FmzcAnwbZe1F7jE4f30x.vYtkn8.94e8Urblad/iljg4TdcGPG/S',1,NULL,NULL),(5,'A','C','ac@email.com','$2y$10$JbrqlMYFsbmG4NvQhUf4eehRvgUeA7ZWUwwQvUIXIXUYGzTD5G9e6',0,NULL,NULL),(7,'Din','Dinner','dinner@email.com','$2y$10$PdzKqycVHCgZv5CSwAD7ROYdzGrIJ/fkqb2uW5UZzMTGgVDCtM6lW',0,'09560624024','Indonesia');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-18 16:47:30
+-- Dump completed on 2024-02-19 19:48:03

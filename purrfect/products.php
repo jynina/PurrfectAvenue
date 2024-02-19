@@ -58,15 +58,15 @@ mysqli_close($conn);
     </header>
 
     <div class="category category-1">
-        <div class="ecart">
+        <!-- <div class="ecart">
             <div class="ecart-header cursor" onclick="toggleCart()">
                 <h3>View Cart</h3>
-            </div>
+            </div> -->
             <div class="cart" id="cart">
                 <h2>Shopping Cart</h2>
                 <div id="cart-content"></div>
                 <div id="total"></div>
-            </div>
+            </div> 
         </div>
         <?php foreach ($productsByGroup as $group => $products): ?>
             <div class="header-title">
@@ -80,7 +80,7 @@ mysqli_close($conn);
                             <div class="product-id" style="display: none;"><?php echo $product['product_id']; ?></div>
                             <div class="product-name"><?php echo $product['product_name']; ?></div>
                             <div class="product-description"><?php echo $product['product_desc']; ?></div>
-                            <div class="product-price">$<?php echo $product['product_price']; ?></div>
+                            <div class="product-price">₱<?php echo $product['product_price']; ?></div>
                             <?php
                             if ($product['stock_quantity'] == 0) {
                                 echo "<button class='add-to-cart' disabled>Out of Stock</button>";
