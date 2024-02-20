@@ -139,7 +139,7 @@
                             <span><?php echo $productName; ?></span>
                         </div>
                     </td>
-                    <td>$<?php echo $productPrice; ?></td>
+                    <td>₱<?php echo $productPrice; ?></td>
                     <td>
                         <form method="post" action="updatecart.php">
                             <input type="hidden" name="product_id" value="<?php echo $productId; ?>">
@@ -147,7 +147,7 @@
                             <input type="submit" name="update" value="Update">
                         </form>
                     </td>
-                    <td>$<?php echo number_format($total, 2); ?></td>
+                    <td>₱<?php echo number_format($total, 2); ?></td>
                     <td>
                         <form method="post" action="removefromcart.php">
                             <input type="hidden" name="product_id" value="<?php echo $productId; ?>">
@@ -160,13 +160,14 @@
             ?>
             <tr>
                 <td colspan="3" align="right">Total:</td>
-                <td colspan="1">$<?php echo number_format($totalPrice, 2); ?></td>
+                <td colspan="1">₱<?php echo number_format($totalPrice, 2); ?></td>
             </tr>
         </table>
         <div class="shpcrt">
             <a href="products.php" class="first">Back</a>
             <a href="checkout.php" class="second">Proceed to Checkout</a>
         </div>
+        <script src="app.js"></script>
         </body>
         </html>
         <?php

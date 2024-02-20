@@ -82,6 +82,7 @@
             <li><a href="productsadmin.php">Products</a>
             <li><a href="orderreport.php">Order Report</a></li>
             <li><a href="home.php">Admin Panel</a></li> 
+            <li><a href="#" onclick="logoutAlert()">Log Out</a></li>
         </ul> 
     </div>
 </header>    
@@ -137,7 +138,7 @@
                     <td><?php echo $order['contact_num']; ?></td>
                     <td><?php echo $order['address']; ?></td>
                     <td><?php echo $order['mode_of_payment']; ?></td>
-                    <td><?php echo $order['total_price']; ?></td>
+                    <td>₱<?php echo $order['total_price']; ?></td>
                     <td><?php echo $order['order_date']; ?></td>
                     <td><?php echo $order['received_date']; ?></td>
                     <td><?php echo $order['status']; ?></td>
@@ -149,5 +150,6 @@
         <a href="home.php" class="back-listbtn">Back to Home</a>
         </div>
     </div>
+    <script src="app.js"></script>
 </body>
 </html>

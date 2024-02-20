@@ -1,9 +1,5 @@
 <?php 
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: home.php");
-    exit();
-}
 
 include 'database.php';
 
@@ -34,29 +30,33 @@ mysqli_close($conn);
 </head>
 <body>
 <section class="products">
-    <header>
-        <a href="home.php"><img src="images/Background/logo.png" class="logo"></a>
-        <div class="nav-bar">
-            <div class="toggle"></div>
-            <ul class="navigation">
-                <?php if (isset($_SESSION['user_id'])): ?>
-                    <li><a href="shoppingcart.php">Cart</a></li>
-                    <li><a href="orderspage.php">My Orders</a></li>
-                    <li><a href="orderhistory.php">Order History</a></li>
-                    <?php if ($admin['is_admin'] == 1): ?>
-                        <li><a href="postproduct.php">Post Product</a></li>
-                        <li><a href="home.php">Admin Panel</a></li>
-                    <?php else: ?>
-                        <li><a href="home.php">Home</a></li>
-                        <li><a href="products.php">Products</a></li>
-                        <li><a href="settings.php">User Settings</a></li>
-                    <?php endif; ?>
-                <?php endif; ?>
+<header>
+    <a href="home.php"><img src="images/Background/logo.png" class="logo"></a>
+    <div class="nav-bar">
+        <div class="toggle"></div>
+        <ul class="navigation">
+            <?php 
+            if (!isset($_SESSION['cart'])) {
+                $_SESSION['cart'] = [];
+            }
+            $itemCnt = count($_SESSION['cart']);
+            
+            if (isset($_SESSION['user_id'])): ?>
+                <li><a href='shoppingcart.php' ><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA60lEQVR4nO3WsQpBURjA8VsmKwNG5Q1MJoOFlFmKJ7BY5QHkJZTJG9ydYrPZhZXBoAh/XX1ic45z7pH4z1/n11nOdzzvJwPGPFoA1U/AQScg4wS/BwxuNHQ8lwEVgaeu4SiwB85AwjXuy60bruEm4TR6BadDglcqt56HAPdV4F4IcE0FzltGL0BSBY4AG4vw7CX6hA8twl0duG4RLujAMVkYpu2DF1EZFnxiAfa1UIHbFuDWO3AK2BmgWyCuDQueC9YkcNQAD/LByL6F/m5AGVgHGwYomc4pJwfdW5rOfQVckkOXQNF07p/nqit4etkTHpfOQQAAAABJRU5ErkJggg=='><span id='itemCount'><?php echo array_sum($_SESSION['cart']); ?></span></a></li>
+                <li><a href="orderspage.php">My Orders</a></li>
+                <li><a href="orderhistory.php">Order History</a></li>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="products.php">Products</a></li>
+                <li><a href="settings.php">User Settings</a></li>
                 <li><a href="#" onclick="logoutAlert()">Log Out</a></li>
-            </ul>
-        </div>
-    </header>
-
+            <?php else: ?>
+                <li><a href='shoppingcart.php' ><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA60lEQVR4nO3WsQpBURjA8VsmKwNG5Q1MJoOFlFmKJ7BY5QHkJZTJG9ydYrPZhZXBoAh/XX1ic45z7pH4z1/n11nOdzzvJwPGPFoA1U/AQScg4wS/BwxuNHQ8lwEVgaeu4SiwB85AwjXuy60bruEm4TR6BadDglcqt56HAPdV4F4IcE0FzltGL0BSBY4AG4vw7CX6hA8twl0duG4RLujAMVkYpu2DF1EZFnxiAfa1UIHbFuDWO3AK2BmgWyCuDQueC9YkcNQAD/LByL6F/m5AGVgHGwYomc4pJwfdW5rOfQVckkOXQNF07p/nqit4etkTHpfOQQAAAABJRU5ErkJggg=='><span id='itemCount'><?php echo array_sum($_SESSION['cart']); ?></span></a></li>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="registration.php">Sign Up</a></li>
+            <?php endif; ?>
+        </ul>
+    </div>
+</header>
     <div class="category category-1">
         <!-- <div class="ecart">
             <div class="ecart-header cursor" onclick="toggleCart()">

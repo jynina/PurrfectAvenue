@@ -40,6 +40,7 @@ $result = $conn->query($sql);
             <li><a href="productsadmin.php">Products</a>
             <li><a href="orderreport.php">Order Report</a></li>
             <li><a href="home.php">Admin Panel</a></li> 
+            <li><a href="#" onclick="logoutAlert()">Log Out</a></li>
         </ul> 
     </div>
 </header>    
@@ -60,7 +61,7 @@ $result = $conn->query($sql);
                 echo "<tr>";
                 echo "<td>" . $row["orderid"] . "</td>";
                 echo "<td>" . $row["fullName"] . "</td>";
-                echo "<td>" . $row["total_price"] . "</td>";
+                echo "<td> ₱" . $row["total_price"] . "</td>";
                 echo "<td>" . $row["order_date"] . "</td>";
                 echo "<td>" . $row["received_date"] . "</td>"; // Include received date
                 echo "<td>" . $row["status"] . "</td>";
@@ -75,6 +76,7 @@ $result = $conn->query($sql);
     <div class="button">
     <a href="home.php" class="back-listbtn">Back to Home</a>
     </div>
+    <script src="app.js"></script>
 </body>
 </html>
 

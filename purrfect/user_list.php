@@ -77,6 +77,7 @@ tr:nth-child(even) {background-color: #f9f9f9;}
             <li><a href="productsadmin.php">Products</a>
             <li><a href="orderreport.php">Order Report</a></li>
             <li><a href="home.php">Admin Panel</a></li> 
+            <li><a href="#" onclick="logoutAlert()">Log Out</a></li>
         </ul> 
     </div>
 </header>    
@@ -105,5 +106,6 @@ tr:nth-child(even) {background-color: #f9f9f9;}
     mysqli_free_result($result);
     mysqli_close($conn);
     ?>
+    <script src="app.js"></script>
 </body>
 </html>

@@ -31,6 +31,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] !== 'yes' || !isset($_SESSION
             <li><a href="postproduct.php">Post Product</a>
             <li><a href="orderreport.php">Order Report</a></li>
             <li><a href="home.php">Admin Panel</a></li> 
+            <li><a href="#" onclick="logoutAlert()">Log Out</a></li>            
         </ul> 
     </div>
 </header>     
@@ -70,7 +71,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] !== 'yes' || !isset($_SESSION
                     echo "<tr>";
                     echo "<td><img src='" . $row["image_url"] . "' alt='Product Image' style='width: 50px;'> " . $row["product_name"] . "</td>";
                     echo "<td>" . $row["product_desc"] . "</td>";
-                    echo "<td>" . $row["product_price"] . "</td>";
+                    echo "<td> ₱" . $row["product_price"] . "</td>";
                     echo "<td>" . ($row["quantity"] == 0 ? "Out of Stock" : $row["quantity"]) . "</td>"; // Display the quantity
                     echo "<td><a href='modifyproducts.php?product_id=" . $row["product_id"] . "' class='update'>Update</a></td>"; 
                     echo "</tr>";
@@ -88,6 +89,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] !== 'yes' || !isset($_SESSION
 <div class="button">
     <a href="home.php" class="back-listbtn">Back to Home</a>
 </div>
+<script src="app.js"></script>
 </body>
 </html>
 <?php

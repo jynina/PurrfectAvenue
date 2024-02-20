@@ -14,7 +14,7 @@ if (isset($_POST['product_id'])) {
         $_SESSION['cart'][$productId]++;
     }
 
-    echo json_encode(array('message' => 'Product added to cart successfully'));
+    echo json_encode(array('message' => 'Product added to cart successfully', 'numberOfItems' => count($_SESSION['cart'])));
 } else {
     echo json_encode(array('message' => 'Error adding product to cart'));
 }
