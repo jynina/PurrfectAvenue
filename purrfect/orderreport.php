@@ -34,12 +34,12 @@
     function fetchOrders($conn, $dateFrom, $dateTo) {
         $sql = "SELECT * FROM orders WHERE status = 'Received'";
         if (!empty($dateFrom)) {
-            $sql .= " AND order_date >= '$dateFrom'";
+            $sql .= " AND received_date >= '$dateFrom'";
         }
         if (!empty($dateTo)) {
-            $sql .= " AND order_date <= '$dateTo'";
+            $sql .= " AND received_date <= '$dateTo'";
         }
-        $sql .= " ORDER BY order_date DESC";
+        $sql .= " ORDER BY received_date DESC";
         $result = mysqli_query($conn, $sql);
         $orders = [];
         while ($row = mysqli_fetch_assoc($result)) {

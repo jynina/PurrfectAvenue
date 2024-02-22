@@ -48,8 +48,8 @@ function addToCart(product_id, product_name, category, product_price) {
         cart[category] = [];
     }
     cart[category].push(product);
-    updateCartDisplay();
-    updateTotal();
+    // updateCartDisplay();
+    // updateTotal();
 
     // Send AJAX request to add the product to the cart
     $.ajax({
@@ -59,6 +59,7 @@ function addToCart(product_id, product_name, category, product_price) {
         dataType: 'json',
         success: function(response) {
             alert(response.message);
+            $('#itemCount').text(response.numberOfItems);
         },
         error: function(xhr, status, error) {
             alert('Error adding product to cart');
