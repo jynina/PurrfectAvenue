@@ -59,6 +59,7 @@ $orders = fetchActiveOrders($conn);
             <li><a href="orderhistoryadmin.php">Completed Orders</a>
             <li><a href="productsadmin.php">Products</a>
             <li><a href="orderreport.php">Order Report</a></li>
+            <li><a href="viewappointments.php">Appointments</a></li> 
             <li><a href="home.php">Admin Panel</a></li> 
             <li><a href="#" onclick="logoutAlert()">Log Out</a></li>
         </ul> 
@@ -98,7 +99,7 @@ $orders = fetchActiveOrders($conn);
     </table>
     </div>
     <div class="button">
-    <a href="home.php" class="back-listbtn">Back to Admin Panel</a>
+    <a href="home.php" class="back-listbtn">Back to Home</a>
     </div>
     <script src="app.js"></script>
 </body>

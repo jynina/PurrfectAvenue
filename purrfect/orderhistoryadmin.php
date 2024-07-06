@@ -39,6 +39,7 @@ $result = $conn->query($sql);
             <li><a href="orderhistoryadmin.php">Completed Orders</a>
             <li><a href="productsadmin.php">Products</a>
             <li><a href="orderreport.php">Order Report</a></li>
+            <li><a href="viewappointments.php">Appointments</a></li> 
             <li><a href="home.php">Admin Panel</a></li> 
             <li><a href="#" onclick="logoutAlert()">Log Out</a></li>
         </ul> 

@@ -16,32 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `order_items`
+-- Table structure for table `available_times`
 --
 
-DROP TABLE IF EXISTS `order_items`;
+DROP TABLE IF EXISTS `available_times`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `order_items` (
-  `orderitemsid` int NOT NULL AUTO_INCREMENT,
-  `orderid` int NOT NULL,
-  `productid` int NOT NULL,
-  `quantity` int NOT NULL,
-  PRIMARY KEY (`orderitemsid`),
-  KEY `orderid` (`orderid`),
-  KEY `fk_product_id` (`productid`),
-  CONSTRAINT `fk_product_id` FOREIGN KEY (`productid`) REFERENCES `products` (`product_id`) ON DELETE CASCADE,
-  CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`orderid`) REFERENCES `orders` (`orderid`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `available_times` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `time_slot` datetime NOT NULL,
+  `max_clients` int NOT NULL DEFAULT '5',
+  `current_clients` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `order_items`
+-- Dumping data for table `available_times`
 --
 
-LOCK TABLES `order_items` WRITE;
-/*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
-/*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
+LOCK TABLES `available_times` WRITE;
+/*!40000 ALTER TABLE `available_times` DISABLE KEYS */;
+INSERT INTO `available_times` VALUES (1,'2024-07-01 09:00:00',5,0),(2,'2024-07-01 10:00:00',5,0),(3,'2024-07-01 11:00:00',5,0),(4,'2024-07-01 12:00:00',5,0),(5,'2024-07-01 13:00:00',5,0),(6,'2024-07-01 14:00:00',5,0),(7,'2024-07-01 15:00:00',5,0),(8,'2024-07-01 16:00:00',5,0),(9,'2024-07-02 09:00:00',5,0),(10,'2024-07-02 10:00:00',5,0),(11,'2024-07-02 11:00:00',5,0),(12,'2024-07-02 12:00:00',5,0),(13,'2024-07-02 13:00:00',5,0),(14,'2024-07-02 14:00:00',5,0),(15,'2024-07-02 15:00:00',5,0),(16,'2024-07-02 16:00:00',5,0);
+/*!40000 ALTER TABLE `available_times` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

@@ -2,7 +2,7 @@
 
 $hostName = 'localhost';
 $dbUser = 'root';
-$dbPassword = 'Z87=S|4~:fG%';
+$dbPassword = 'password';
 $dbName = 'purrfect';
 $conn = mysqli_connect($hostName, $dbUser, $dbPassword, $dbName);
 

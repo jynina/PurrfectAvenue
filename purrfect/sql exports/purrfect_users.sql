@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: purrfect
 -- ------------------------------------------------------
--- Server version	8.0.35
+-- Server version	8.4.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `lastName` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `firstName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lastName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `is_admin` tinyint NOT NULL DEFAULT '0',
-  `contact_num` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `contact_num` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Ali','Adieu','a@example.com','$2y$10$bYwX6t3UeMUHJGKpU8VzTu7zLCAD6xigvxk.ClM8MISLgNvWIk.Ru',1,NULL,NULL),(2,'Bea','Bora','b@example.com','$2y$10$uzBxnzwXy8ZSFNToZ7d1..oqygaBmIU7p.lOjtELdSbc0JzZO7RkC',0,'worlf','09560624023'),(4,'K','K','k@example.com','$2y$10$0FmzcAnwbZe1F7jE4f30x.vYtkn8.94e8Urblad/iljg4TdcGPG/S',1,NULL,NULL),(5,'A','C','ac@email.com','$2y$10$JbrqlMYFsbmG4NvQhUf4eehRvgUeA7ZWUwwQvUIXIXUYGzTD5G9e6',0,NULL,NULL),(7,'Din','Dinner','dinner@email.com','$2y$10$PdzKqycVHCgZv5CSwAD7ROYdzGrIJ/fkqb2uW5UZzMTGgVDCtM6lW',0,'09560624024','Indonesia');
+INSERT INTO `users` VALUES (8,'Admin','Admin','admin@purrfect.com','$2y$10$6ca7CKNyVtuhYS/o0l828.fVAj6hucy8GhrFT0hsvvE5oP0Is4Aiq',1,'09999999999','Admin Corp'),(9,'Client','Client','client@purrfect.com','$2y$10$J0gNqjDxxaPTqUB3qS8E9ePNS0O7HnO2QuWniYthf4Ts5mdH4sDrO',0,'0999999992','Client Corp');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-19 19:48:03
+-- Dump completed on 2024-07-07  4:08:34

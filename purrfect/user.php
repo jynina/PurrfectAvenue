@@ -25,6 +25,9 @@ if (!isset($_SESSION['user'])){
 				<ul class="navigation"> 
 					<li><a href="home.php">Home</a></li> 
 					<li><a href="products.php">Products</a></li> 
+					<li><a href="bookappointment.php">Book an Appointment</a></li> 
+					<li><a href="userviewappointment.php">My Appointment</a></li> 
+
 					<li><a href="settings.php">User Settings</a></li>
 					<li><a href="aboutus.php">About Us</a></li> 	
 					<li><a href="#" onclick="logoutAlert()">Log Out</a></li> 

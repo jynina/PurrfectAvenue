@@ -30,6 +30,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] !== 'yes' || !isset($_SESSION
             <li><a href="productsadmin.php">Products</a>
             <li><a href="postproduct.php">Post Product</a>
             <li><a href="orderreport.php">Order Report</a></li>
+            <li><a href="viewappointments.php">Appointments</a></li> 
             <li><a href="home.php">Admin Panel</a></li> 
             <li><a href="#" onclick="logoutAlert()">Log Out</a></li>            
         </ul> 

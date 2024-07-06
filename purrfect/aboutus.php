@@ -73,7 +73,7 @@
 		</div>
 	</div> 
 	<div class="footer"> 
-		<p >Copyright 2024 | WebDev | Group 5</p>
+		<p>Copyright 2024 | Group 6</p>
 	</div> 
 	<script src="app.js"></script>
 	</section>	

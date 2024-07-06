@@ -51,6 +51,7 @@ if (!isset($_SESSION['user'])){
 			<a href="orderhistoryadmin.php">View Completed Orders</a>
             <a href="productsadmin.php">View Products</a>
 			<a href="orderreport.php">View Order Report</a>
+			<a href="viewappointments.php">View Appointments</a>
 		</div> 
 	</div>
 	<ul class="sci"> 
@@ -59,7 +60,7 @@ if (!isset($_SESSION['user'])){
 		<li><a href="aboutus.php"><i class='bx bxl-instagram' ></i></li>
 	</ul> 
 	<div class="footer"> 
-		<p>Copyright 2024 | WebDev | Group 5</p>
+		<p>Copyright 2024 | Group 6</p>
 	</div>
 	<script src = "app.js"></script>
 	</section> 

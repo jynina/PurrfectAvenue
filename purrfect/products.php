@@ -50,6 +50,8 @@ mysqli_close($conn);
                 <li><a href="home.php">Home</a></li>
                 <li><a href="products.php">Products</a></li>
                 <li><a href="settings.php">User Settings</a></li>
+                <li><a href="bookappointment.php">Book an Appointment</a></li> 
+					<li><a href="userviewappointment.php">My Appointments</a></li> 
                 <li><a href="#" onclick="logoutAlert()">Log Out</a></li>
             <?php else: ?>
                 <?php
